@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Created Order{% endblock %}
+
+{% block body %}
+
+<div>
+	<h1>Created order "{{ title }}" with id "{{ order }}".</h1>
+	<button type="button" onClick="location.href='{{ path('list_orders') }}'">Back to orders</button>
+</div>
+
+{% endblock %}

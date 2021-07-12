@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+<style>
+	table, th, td { border: 1px solid black; }
+</style>
+
+<div>
+	<p style="font-size:20px">
+	<a href="{{ path('list_orders') }}">ORDERS</a>
+	<a href="{{ path('list_products') }}">PRODUCTS</a>
+	</p>
+
+    <h1>Orders</h1>
+	<form action="{{ path('list_orders') }}" method="get">
+		Search for:
+		{% if selectedSearchValue == 1 %}
+			<select class="custom-select" name="svalue" id="svalue">
+								<option value="0" selected>SHOW ALL(search field is ignored)
+								<option value="1" selected>User ID</option>
+								<option value="2">Email</option>
+			</select>
+		{% elseif selectedSearchValue == 2 %}
+			<select class="custom-select" name="svalue" id="svalue">
+								<option value="0" selected>SHOW ALL(search field is ignored)
+								<option value="1">User ID</option>
+								<option value="2"selected>Email</option>
+			</select>
+		{% else %}
+			<select class="custom-select" name="svalue" id="svalue">
+								<option value="0" selected>SHOW ALL(search field is ignored)
+								<option value="1">User ID</option>
+								<option value="2">Email</option>
+			</select>
+		{% endif %}
+		
+		<input type="text" id="sfield" name="sfield" value="{{ searchValue }}">
+		
+		Filter by date:
+		{% if selectedFilterValue == 1 %}
+			<select class="custom-select" name="fvalue" id="fvalue">
+								<option value="0">NO FILTER</option>
+								<option value="1" selected>Ascending</option>
+								<option value="2">Descending</option>
+			</select>
+		{% elseif selectedFilterValue == 2 %}
+			<select class="custom-select" name="fvalue" id="fvalue">
+								<option value="0">NO FILTER</option>
+								<option value="1">Ascending</option>
+								<option value="2" selected>Descending</option>
+			</select>
+		{% else %}
+			<select class="custom-select" name="fvalue" id="fvalue">
+								<option value="0" selected>NO FILTER</option>
+								<option value="1">Ascending</option>
+								<option value="2">Descending</option>
+			</select>
+		{% endif %}
+		
+		
+		<input type="submit" value="Submit">
+		
+		
+	</form>
+
+	<table>
+		<tr>
+			<th width="100">ID</th>
+			<th width="150">User ID</th>
+			<th width="250">Title</th>
+			<th width="250">Email</th>
+			<th width="110">Created At</th>
+			<th><button type="button" onClick="location.href='{{ path('create_order_form') }}'">Create new order</button></th>
+			
+		</tr>
+	</table>
+	
+    {% for order in orders %}
+	
+	<table>
+		<tr>
+			<th width="100">{{ order.id }}</th>
+			<th width="150">{{ order.userid }}</th>
+			<th width="250">{{ order.title }}</th>
+			<th width="250">{{ order.email }}</th>
+			<th width="110">{{ order.createdat|date('Y-m-d') }}</th>
+			<th>
+				<form action="{{ path('view_order') }}" method="get">
+					<input type="hidden" id="vorderid" name="vorderid" value="{{ order.id }}">
+					<input type="submit" value="View Order">
+				</form>
+			</th>			
+		</tr>
+	</table>	
+	
+    {% endfor %}
+</div>
+
+{% endblock %}

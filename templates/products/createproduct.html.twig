@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add new product{% endblock %}
+
+{% block body %}
+
+<div>
+	<h1>Add new product</h1>
+	<form action="{{ path('created_product') }}" method="get">
+		Name: <br>
+		<input type="text" required="required" id="aname" name="aname" value=""><br>
+		Amount: <br>
+		<input type="number" min="1" required="required" id="aamount" name="aamount" value=""><br>
+		Currency: <br>
+		<select class="custom-select" name="acurrency" id="acurrency">
+								<option value="1">EUR</option>
+								<option value="2">USD</option>
+		</select><br>
+		<input type="submit" value="Add">
+	</form>
+</div>
+
+{% endblock %}

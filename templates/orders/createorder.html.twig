@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new order{% endblock %}
+
+{% block body %}
+
+<div>
+	<h1>Create new order</h1>
+	<form action="{{ path('created_order') }}" method="get">
+		<input type="submit" value="Create order"><br><br>
+		User ID: <br>
+		<input type="number" min="1" required="required" id="ouserid" name="ouserid" value=""><br>
+		Title: <br>
+		<input type="text" required="required" id="otitle" name="otitle" value=""><br>
+		Email: <br>
+		<input type="text" required="required" id="oemail" name="oemail" value=""><br>
+
+		
+		Choose products: 
+		<table>
+		<tr>
+			<th width="100">ID</th>
+			<th width="250">Name</th>
+			<th width="100">Amount</th>
+			<th width="100">Currency</th>
+			<th width="110">Created At</th>			
+		</tr>
+		</table>
+	
+		{% for product in products %}
+	
+		<table>
+			<tr>
+				<th width="100">{{ product.id }}</th>
+				<th width="250">{{ product.name }}</th>
+				<th width="100">{{ product.amount }}</th>
+				<th width="100">{{ product.currency }}</th>
+				<th width="110">{{ product.createdat|date('Y-m-d') }}</th>
+				<th><input type="checkbox" name="checkBox[]"  id="ocheck" value="{{ product.id }}" /></th>
+			</tr>
+		</table>	
+	
+		{% endfor %}
+	</form>
+</div>
+
+{% endblock %}

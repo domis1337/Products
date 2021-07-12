@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Order{% endblock %}
+
+{% block body %}
+
+<div>
+	<h1>View Order</h1>
+	
+	{% for o in order %}
+	
+	ID: <br>
+	{{ o.id }}<br><br>
+	User ID: <br>
+	{{ o.userid }}<br><br>
+	Title: <br>
+	{{ o.title }}<br><br>
+	Email: <br>
+	{{ o.email }}<br><br>
+	Created At: <br>
+	{{ o.createdat|date('Y-m-d') }}<br><br><br>
+	
+	
+	
+	<form action="{{ path('list_orders') }}" method="get">
+		<input type="Submit" value="Back to orders"><br><br>
+		<table>
+		<tr>
+			<th width="100">ID</th>
+			<th width="250">Name</th>
+			<th width="100">Amount</th>
+			<th width="100">Currency</th>
+			<th width="110">Created At</th>			
+		</tr>
+		</table>
+	
+		{% for product in products %}
+	
+		<table>
+			<tr>
+				<th width="100">{{ product.id }}</th>
+				<th width="250">{{ product.name }}</th>
+				<th width="100">{{ product.amount }}</th>
+				<th width="100">{{ product.currency }}</th>
+				<th width="110">{{ product.createdat|date('Y-m-d') }}</th>
+				<th><input type="checkbox" name="checkBox[]"  id="pcheck" value="{{ product.id }}" /></th>
+			</tr>
+		</table>	
+	
+		{% endfor %}
+		<input type="hidden" id="oorderid" name="oorderid" value="{{ o.id }}">
+	</form>
+	
+	{% endfor %}
+</div>
+
+{% endblock %}

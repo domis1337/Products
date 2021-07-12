@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Added product{% endblock %}
+
+{% block body %}
+
+<div>
+	<h1>Added a product {{ name }} with id "{{ product }}".</h1>
+	<button type="button" onClick="location.href='{{ path('list_products') }}'">Back to product list</button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<style>
+	table, th, td { border: 1px solid black; }
+</style>
+
+<div>
+	<p style="font-size:20px">
+	<a href="{{ path('list_orders') }}">ORDERS</a>
+	<a href="{{ path('list_products') }}">PRODUCTS</a>
+	</p>
+
+    <h1>Products</h1>
+	<table>
+		<tr>
+			<th width="100">ID</th>
+			<th width="250">Name</th>
+			<th width="100">Amount</th>
+			<th width="100">Currency</th>
+			<th width="110">Created At</th>
+			<th><button type="button" onClick="location.href='{{ path('create_product_form') }}'">Add new product</button></th>
+			
+		</tr>
+	</table>
+	
+    {% for product in products %}
+	
+	<table>
+		<tr>
+			<th width="100">{{ product.id }}</th>
+			<th width="250">{{ product.name }}</th>
+			<th width="100">{{ product.amount }}</th>
+			<th width="100">{{ product.currency }}</th>
+			<th width="110">{{ product.createdat|date('Y-m-d') }}</th>	
+			<th>
+				<form action="{{ path('update_product') }}" method="get">
+					<input type="hidden" id="uproductid" name="uproductid" value="{{ product.id }}">
+					<input type="text" id="uname" name="uname" placeholder="Enter new name" title="Enter new name" value="">
+					<input type="number" min="1" id="uamount" name="uamount" placeholder="Enter new amount" title="Enter new amount" value="">
+					<input type="submit" value="Update">
+				</form>
+			</th>
+		</tr>
+	</table>	
+	
+    {% endfor %}
+</div>
+
+{% endblock %}
